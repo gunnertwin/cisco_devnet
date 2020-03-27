@@ -17,9 +17,10 @@ def as3_declaration():
     result = requests.get(url, headers=headers, auth=(f5["username"], f5["password"]), verify=False)
 
     if result.status_code == 200 or result.status_code == 204 :
-        result = requests.post(url, headers=headers, auth=(f5["username"], f5["password"]), verify=False, json=body)
-        if result.status_code == 200:
+        result = requests.post(url, headers=headers, auth=(f5["username"], f5["password"]), verify=False, data=json.dumps(body)).json()
+        if result["results"][0]["code"] == 200:
             print("JSON config was uploaded to the F5 successfully")
+            print(json.dumps(result, indent=4))
         else:
             print("There was a problem uploading the JSON config, please double check the formatting.")
             exit(0)
