@@ -18,7 +18,7 @@ for host in router["host"]:
         api_data = response.json()
 
         interfaces = api_data["Cisco-IOS-XE-cdp-oper:cdp-neighbor-details"]["cdp-neighbor-detail"]
-        #print(json.dumps(api_data, indent=4))
+
         for device in interfaces:
                 payload = {
                 "ietf-interfaces:interfaces": {
