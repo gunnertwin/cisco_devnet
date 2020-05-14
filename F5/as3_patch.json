@@ -1,0 +1,58 @@
+{
+    "class": "AS3",
+    "action": "patch",
+    "patchBody": [
+        {
+            "path": "/Team_B/APP1",
+            "op": "add",
+            "value": {
+                "class": "Application",
+                "template": "https",
+                "serviceMain": {
+                    "class": "Service_HTTPS",
+                    "virtualAddresses": [
+                    "10.5.0.3"
+                    ],
+                    "pool": "Service_HTTPS_pool",
+                    "serverTLS": "test_ssl_cert",
+                    "virtualPort": 443,
+                    "snat": "auto"
+                },
+                "test_ssl_cert": {
+                    "class": "TLS_Server",
+                    "label": "simplest decl requires just cert",
+                    "certificates": [
+                    {
+                        "certificate": "tlsserver_local_cert"
+                    }
+                    ]
+                },
+                "tlsserver_local_cert": {
+                    "class": "Certificate",
+                    "certificate": {"bigip":"/Common/default.crt"},
+                    "privateKey": {"bigip":"/Common/default.key"}
+                },
+                "Service_HTTPS_pool": {
+                    "class": "Pool",
+                    "monitors": [
+                    "http"
+                    ],
+                    "members": [{
+                    "servicePort": 80,
+                    "priorityGroup": 1,
+                    "serverAddresses": [
+                        "10.10.10.10"                      
+                    ]
+                    },
+                    {
+                    "servicePort": 80,
+                    "priorityGroup": 1,
+                    "serverAddresses": [
+                        "10.10.10.11"                      
+                    ]
+                }]
+                }
+                }
+        }]
+    }
+        

@@ -6,7 +6,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def as3_declaration():
 
-    with open('as3_config.json', 'r') as f:
+    with open('as3_patch.json', 'r') as f:
         body = json.load(f)
     
     headers = {"Accept": "application/json",

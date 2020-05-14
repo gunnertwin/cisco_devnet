@@ -8,7 +8,7 @@
        "id": "1",
        "label": "http_vs",
        "remark": "http_remark",
-       "Team_A": {
+       "Team_B": {
           "class": "Tenant",
           "APP1": {
              "class": "Application",
